@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>My App</title>  
+  
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"> 
+  <link rel="stylesheet" href="styles/app.css"/> 
+  <script src="cordova.js"></script>
+  <script src="lib/jquery-2.0.3.min.js"></script>
+  <script src="phonegap.js"></script> 
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+
+
+  <script src="js/app.js"></script> 
+  <style>
+  body{
+	  width:100%;
+	  position:absolute;
+	  left:0;
+	  overflow-x:hidden;
+	  font-family:Tahoma, Geneva, sans-serif !important;
+  }
+  div.float-left {
+    float: left;
+}
+
+.text-centering {
+    text-align: center;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.main-image-wrapper {
+    text-align: center;
+    opacity: 0.2;
+    height: 180px;
+    margin: 30px 0;
+}
+
+.main-image {
+    font-size: 150px;
+    line-height: 200px;
+}
+
+input[type=email], input[type=password] {
+    display: block;
+    width: 80%;
+    height: 48px;
+    margin: 0 auto;
+    font-size: 19px;
+    outline: none;
+    line-height: 48px;
+}
+
+.login-button {
+    display: block;
+    width: 80%;
+    margin: 0 auto 0 auto;
+    font-size: 18px;
+}
+
+.forgot-password {
+    display: block;
+    margin: 8px auto 0 auto;
+    font-size: 14px;
+}
+.float-left {
+    float: left;
+}
+
+.list-item-container {
+    line-height: 14px;
+    min-height: 14px;
+    font-size: 12px;
+}
+
+.list-item-main {
+    padding: 15px 0px 15px 5px;
+}
+
+.list-item-main:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.list-item-left {
+    width: 60px;
+    margin-right: -60px;
+    float: left;
+}
+
+.list-item-right {
+    width: 100%;
+    float: right;
+}
+
+.list-item-content {
+    margin-left: 60px;
+    margin-right: 30px;
+}
+
+.avator {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.list-top {
+    margin-top: -1px;
+}
+
+.list-item-name {
+    font-weight: 500;
+    line-height: 16px;
+    min-height: 16px;
+}
+
+.list-item-text {
+    line-height: 14px;
+    min-height: 14px;
+}
+
+.list-item-action {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    margin-top: -10px;
+    font-size: 20px;
+    line-height: 26px;
+    opacity: 0.4;
+}
+
+.lucent {
+    opacity: 0.4;
+}
+.margin-little {
+    margin: 4px;
+}
+
+.width-full {
+    width: 100%;
+}
+
+.width-half {
+    width: 48%;
+}
+
+.lucent {
+    opacity: 0.4;
+}
+
+.note {
+    margin: 12px 8px;
+    font-size: 13px;
+}
+
+.vspc {
+    margin-top: 20px;
+}
+
+.formarea {
+    width: 90%;
+    margin: 50px auto 0px auto;
+}
+
+input[type=text] {
+    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ons-back-button__icon{
+	color:white;}
+	
+.list__item {
+	background: #f2f2f2;
+	border-bottom: 2px solid #fff;
+	padding:5px;
+	padding-top: 10px;
+	padding-left: 21px;
+	padding-bottom: 10px;
+	}
+.list__item	h5{
+		padding-left: 6px;
+		margin-bottom: -6px !important;
+		margin-top: 0;
+	}
+	.list{
+		font-size:15px;
+	}
+	table{
+		width:100%;
+	}
+	td{
+		width:50%; text-align:left;
+	}
+	.DateFomr{
+		display:none !important;
+	}
+	.Dt>.ng-scope:first-child>.DateFomr{
+		display:block !important;
+	}
+
+  </style>
+</head>
+
+<body ng-controller="MainCtrl">    
+  
+  <ons-split-view 
+    secondary-page="secondary.html" 
+    main-page="page1.html" 
+    main-page-width="70%" 
+    collapse="portrait">
+  </ons-split-view>
+
+ 
+  <script type="text/ons-template" id="page1.html">
+   
+  <div ng-controller="LoginCtrl" ng-init="init()">
+		<div align="center">
+		  <h4 style="margin:1%;padding:10px; color:#3b95d4; font-size:25px"><img src="./images/logo.jpg" width="50%"></h4>
+		</div>
+		<form ng-submit="loginUser()">
+		<input style="border: 1px solid #ccc;padding-left: 37px; margin-bottom:10px;" required type="email" class="text-input--underbar" placeholder="Email" value="" ng-model="userName">
+		<ons-icon icon="fa-user" size="20px" fixed-width="false" style="color: rgb(197, 195, 196);
+font-size: 20px;
+position: relative;
+top: -44px;
+left: 12%;"></ons-icon>
+
+
+
+		<input  style="border: 1px solid #ccc;padding-left: 37px;"  required type="password" class="text-input--underbar" placeholder="Password" value="" ng-model="userPassword">
+		<ons-icon icon="fa-lock" size="20px" fixed-width="false" style="color: rgb(197, 195, 196);
+font-size: 20px;
+position: relative;
+top: -32px;
+left: 12%;"></ons-icon>
+		<br>		
+		<input type="submit" class="button login-button" value="LOGIN" style="font-weight:bold; background-color:#3b95d3;" />
+		<h4 style="color:red" ng-show="Invalid" align="center"> Invalid username or password</h4>
+		<h4 style="color:grey" ng-show="inprocess" align="center">Sending...</h4>
+		</form>
+	</div>
+    </ons-page>
+  </script>
+ 
+ 
+  <script  type="text/ons-template" id="syndata.html">
+  <div class="navigation-bar"   style="background: #3b95d3;
+border: 0;">
+ 
+     <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <span style="margin:1%;padding:0">
+		  <ons-back-button  ng-click="ons.splitView.setMainPage('home.html');" style="color:#fff;"></ons-back-button>
+		  </span>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        <span class="navigation-bar__title navigation-bar__line-height" style="color:white; font-size:25px;"><img src="./images/logo.jpg" width="50%"></span>
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height font-bold">
+        </span>
+      </div>	  	   
+    </div>
+	<div style="background:#3b95d3" ng-controller="ListingDetailScreen">
+	  <div   style="margin-bottom: 3%;
+color: #fff;
+font-weight: bold;
+width: 100%;
+padding: 6px;
+text-align: center;
+">Sync Data</div>
+<div style="clear:both"></div>
+  </div>
+  
+    <ons-list style="border:none">
+	  <button ng-click="syncData()" class="button syncData" style="margin: 20%;padding: 6%;width: 60%;">{{syncstatus}}</button>
+	</ons-list>
+  
+  </script>
+   <script  type="text/ons-template" id="inside.html">
+   <div style="width:100%; overflow-x:hidden;">
+   	<div class="navigation-bar"  ng-controller="ListingDetailScreen" style="background: #3b95d3; min-height:76px;
+border: 0;">
+ 
+     <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <span style="margin:1%;padding:0">
+		  <ons-back-button ng-show="listCall == 1" ng-click="ons.splitView.setMainPage('accomplised.html');" style="color:#fff;"></ons-back-button>
+		  <ons-back-button ng-show="listCall != 1" ng-click="ons.splitView.setMainPage('home.html');" style="color:#fff;"></ons-back-button>
+		  </span>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        <span class="navigation-bar__title navigation-bar__line-height" style="color:white; font-size:18px;">{{JobDetailListing.customer_name}}&nbsp; <span style="font-size:10px;">({{JobDetailListing.title}} {{JobDetailListing.job_name}})<span></span>
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height font-bold" style="margin-top: -21px;
+display: inline-block;">
+        	<button  ng-show="listCall == 0"  style="clear: both;
+width: 62px;
+display: inline;
+font-size: 80%;
+background: #FFF;
+color: blue;
+padding: 0px;
+margin-top: 18px;" ng-click="SaveInfo()" class="button login-button">Save</button>
+        </span>
+      </div>	  	   
+    </div>
+	
+  
+  
+
+    <ons-list ng-controller="ListingDetailScreen" ng-init="init()" style="border: none;margin-top: -9px;">
+	  <div ng-show="listCall != 1" class="Dt"> 	
+	   <div ng-repeat="(kt,jb) in JobDetailListing track by $index" ng-if="returnTyepOf(jb)">
+	      
+			<ons-list-header class="Daet" style="color:#9c9c9c; background:#fff;padding: 8px;font-weight: bold;">{{kt}}</ons-list-header>
+			 <ons-list-item  class="DateFomr" style="display:none !important">
+						<div>
+							
+							<h5>Date</h5> 
+							<input id="selectedDate" disabled="disabled" style="width: 79% !important;height: 10% !important;padding:10px !important;" type="text"  ng-model="JobDetailListing.date" >
+							<input id="datepickers" onchange="updateDateInputs()"  type="date" ng-disabled="listCall == 1"  style="background: #000 !important;
+width: 31px !important;
+height: 35px !important;
+font-size: 31px !important;
+color: black !important;
+position: relative !important;
+left: -39px !important;
+top: 1px;" class="ons-icon ons-icon--ion ion-compass">
+							
+							
+						</div>
+			</ons-list-item>
+			<ons-list-item ng-class="{strike : Jobs.value == 'Yes'}" ng-repeat="(keys,Jobs) in jb track by $index" ng-show="Jobs.type == 'CheckBox' || Jobs.type == 'Dropdown' || Jobs.type == 'InputText' || Jobs.type == 'FileUpload'">
+					
+					<div   ng-show="Jobs.type == 'CheckBox'"  ng-click="changeValue(kt,keys)">
+						<h5><input ng-disabled="listCall == 1" ng-checked="Jobs.value == 'Yes'" type="checkbox" style="backgroud:#fff;border:1px solid #eee; padding:3px;">{{Jobs.title}}</h5> 
+						<div style="clear:fix"></div>
+					</div>
+					
+					<div   ng-show="Jobs.type == 'Dropdown'">
+						<h5>Select {{Jobs.title}}</h5>
+						<select ng-disabled="listCall == 1" ng-options="jobSelect.value as jobSelect.value for jobSelect in Jobs.values" ng-model="Jobs.value" onchange="$(this).parent().children('h5').css('text-decoration','line-through')" style="width:92%; padding:10px;">
+							<option value="">Select {{Jobs.title}}</option>
+						</select>
+					</div>
+					
+					<div   ng-show="Jobs.type == 'InputText'">
+						<h5>{{Jobs.title}}</h5> 
+						<textarea ng-disabled="listCall == 1" ng-model="Jobs.value" style="width:92%; padding:10px;"></textarea>
+					</div>
+					
+					<div   ng-show="Jobs.type == 'FileUpload'">
+						<h5>{{Jobs.title}}</h5>
+						Pick {{Jobs.title}}: <input ng-disabled="listCall == 1" type="file" ng-model="Jobs.FileUpload" accept="image/*"  app-filereader /><br />
+						<img ng-if="Jobs.FileUpload" src="{{Jobs.FileUpload}}" width="100" /><br />
+						<button ng-click="Jobs.FileUpload = null" ng-show="!!Jobs.FileUpload">Remove images</button>
+						<div style="clear:fix"></div>
+					</div>
+				
+			</ons-list-item>
+			
+	  </div>
+	 
+	 
+	</div>
+	<div ng-show="listCall == 1"> 
+	
+			<div ng-repeat="(kt,jb) in JobDetailListing track by $index" ng-show="returnTyepOf(jb)">
+	      
+			<ons-list-header style="color:#9c9c9c; background:#fff;padding: 8px;font-weight: bold;">{{kt}}</ons-list-header>
+			 <ons-list-item  ng-if="$index == 0">
+						<div>
+							<table><tr><td>Date:</td><td>  {{JobDetailListing.date}}</td></tr></table>
+						</div>
+			</ons-list-item>
+			<ons-list-item ng-repeat="(keys,Jobs) in jb  track by $index" ng-show="Jobs.type == 'CheckBox' || Jobs.type == 'Dropdown' || Jobs.type == 'InputText' || Jobs.type == 'FileUpload'">
+					
+					<div   ng-show="Jobs.type == 'CheckBox'">
+						<table><tr><td>{{Jobs.title}}:</td><td>   <input ng-disabled="listCall == 1" ng-checked="Jobs.value == 'Yes'" type="checkbox" style="backgroud:#fff;border:1px solid #eee; padding:3px;"></td></tr></table> 
+						<div style="clear:fix"></div>
+					</div>
+					
+					<div   ng-show="Jobs.type == 'Dropdown'">
+						<table><tr><td>{{Jobs.title}}:</td><td>   {{Jobs.value}}</td></tr></table>
+					</div>
+					
+					<div   ng-show="Jobs.type == 'InputText'">
+						<table><tr><td>{{Jobs.title}}:</td><td>   {{Jobs.value}}</td></tr></table> 
+					</div>
+					
+					<div   ng-show="Jobs.type == 'FileUpload'">
+						<table><tr><td>{{Jobs.title}}:</td><td>   <img src="http://www.wolfwebdevelopment.com/DEMO/homecare/fileupload/{{Jobs.value}}" alt="{{Jobs.title}}" width='60'></td></tr></table>
+					</div>
+				
+			</ons-list-item>
+			
+	  </div>
+	
+	 
+	
+	
+	
+	</div>
+    </ons-page>
+    </div>
+  </script>
+  <script  type="text/ons-template" id="accomplised.html">
+  <div class="navigation-bar" style="background: #3b95d3;
+border: 0;">
+     <div class="navigation-bar__left"  ng-click="ons.splitView.toggle()">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <span style="margin:1%;padding:0"><ons-icon icon="fa-navicon" size="22px" fixed-width="false" style="color: #fff;
+font-size: 22px;
+"></ons-icon></span>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        <span class="navigation-bar__title navigation-bar__line-height" style="color:white; font-size:25px;"><img src="./images/logo.jpg" width="50%"></span>
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height font-bold">
+        
+        </span>
+		
+      </div>	  	   
+    </div>
+	<div style="background:#3b95d3">
+	<div ng-click="ons.splitView.setMainPage('home.html');" style="margin-left: 18%;
+background: #0075c5;border-top-left-radius: 6px;
+border-bottom-left-radius: 6px;
+color: #dcdcda;
+font-size: 16px;
+min-height: 20px;
+width: 29%;
+padding: 6px;
+text-align: center;
+float: left;">Jobs</div>
+	  <div  ng-click="ons.splitView.setMainPage('accomplised.html');" style="margin-bottom: 3%;
+background: #FFF;border-top-right-radius: 6px;
+border-bottom-right-radius: 6px;
+color: #3b96cf;
+font-weight: bold;
+font-size: 16px;
+min-height: 20px;
+width: 29%;
+padding: 6px;
+text-align: center;
+float: left;">Accomplished</div>
+<div style="clear:both"></div>
+  </div>
+  
+  	
+    <ons-list ng-controller="ListingScreen" ng-init="init()">
+	  <ons-list-header style="color:#9c9c9c; background:#fff;padding: 8px;
+font-weight: bold;">Acomplished List</ons-list-header>
+	  <ons-list-item ng-click="setJobID(Jobs.id,1)"  ng-repeat="Jobs in JobListingPending  track by $index" style="background: #f2f2f2;
+border-bottom: 2px solid #fff;" class="list__item ons-list-item-inner list__item--chevron">
+	  		<h5 style="float:left; margin:0; padding:0;color:#939292;width: 100%;">{{Jobs.customer_name}} &nbsp; <span style="font-size:10px;">({{Jobs.job_name}})</span></h5> 
+	  		
+			<div style="clear:fix"></div>
+			<div style="color:#939292"><ons-icon icon="fa-briefcase" size="16px" fixed-width="false" style="color: rgb(197, 195, 196);
+font-size:16px;
+"></ons-icon> Done at {{Jobs.date_accomplished}}</div>
+	  </ons-list-item>
+	  <h4 ng-show="!JobListingPending.length">There is no job accomplished right now</h4>
+	  <div style="clear:fix"></div>
+	</ons-list>
+    </ons-page>
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script  type="text/ons-template" id="home.html">
+  	<div class="navigation-bar" style="background: #3b95d3;
+border: 0;">
+     <div class="navigation-bar__left"  ng-click="ons.splitView.toggle()">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <span style="margin:1%;padding:0"><ons-icon icon="fa-navicon" size="22px" fixed-width="false" style="color: #fff;
+font-size: 22px;
+"></ons-icon></span>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        <span class="navigation-bar__title navigation-bar__line-height" style="color:white; font-size:25px;">
+			<img src="./images/logo.jpg" width="50%">
+		</span>
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height font-bold">
+        </span>
+      </div>	  	   
+    </div>
+	<div style="background:#3b95d3">
+	<div ng-click="ons.splitView.setMainPage('home.html');" style="margin-left: 18%;
+background: #FFF;border-top-left-radius: 6px;
+border-bottom-left-radius: 6px;
+color: #3b96cf;
+font-weight: bold;
+font-size: 16px;
+min-height: 20px;
+width: 29%;
+padding: 6px;
+text-align: center;
+float: left;">Jobs</div>
+	  <div  ng-click="ons.splitView.setMainPage('accomplised.html');" style="margin-bottom: 3%;
+background: #0075c5;border-top-right-radius: 6px;
+border-bottom-right-radius: 6px;
+color: #dcdcda;
+font-size: 16px;
+min-height: 20px;
+width: 29%;
+padding: 6px;
+text-align: center;
+float: left;">Accomplished</div>
+<div style="clear:both"></div>
+  </div>
+    <ons-list ng-init="init()" ng-controller="ListingScreen">
+	  <ons-list-header style="color:#9c9c9c; background:#fff;padding: 8px;
+font-weight: bold;">JOBS LIST</ons-list-header>
+	  <ons-list-item ng-click="setJobID(Jobs.id,0)" ng-repeat="Jobs in JobListing  track by $index" style="background: #f2f2f2;
+border-bottom: 2px solid #fff;" class="list__item ons-list-item-inner list__item--chevron">
+			<h5 style="float:left; margin:0; padding:0;color:#939292;width: 100%;">{{Jobs.customer_name}}&nbsp; <span style="font-size:10px;">({{Jobs.title}})</span></h5> 
+	  		
+			<div style="clear:fix"></div>
+			<div style="color:#939292"><ons-icon icon="fa-briefcase" size="16px" fixed-width="false" style="color: rgb(197, 195, 196);
+font-size: 16px;
+"></ons-icon> Start at {{Jobs.date_start}}</div>
+			
+	  </ons-list-item>
+	  
+	   <h4 ng-show="!JobListing.length">There is no job assigned right now</h4>
+	</ons-list>
+  </script>
+   
+  </script>
+  <script type="text/ons-template" id="secondary.html">
+    <ons-page style="border-right: 1px solid #ddd;">
+
+      <ons-list >
+		 <ons-list-item
+          modifier="chevron"
+          ng-click="ons.splitView.toggle();
+            ons.splitView.setMainPage('home.html');" ng-show="UserInfo">
+          <i class="fa fa-home fa-lg" style="color: #666"></i>
+          &nbsp; Home
+        </ons-list-item>
+		<ons-list-item
+          modifier="chevron"
+          ng-click="ons.splitView.toggle();
+            ons.splitView.setMainPage('syndata.html');"  ng-show="UserInfo">
+          <i class="fa fa-spinner fa-lg" style="color: #666"></i>
+          &nbsp; Sync Data
+        </ons-list-item>
+		  <ons-list-item 
+          modifier="chevron"
+          ng-click="logout(0)"  ng-show="UserInfo">
+          <i class="fa fa-user fa-lg" style="color: #666"></i>
+          &nbsp; Logout
+        </ons-list-item>
+		
+		</ons-list-item>
+		  <ons-list-item 
+          modifier="chevron"
+          ng-click="logout(1)"  ng-show="UserInfo">
+          <i class="fa fa-home fa-home" style="color: #666"></i>
+          &nbsp; Exit 
+        </ons-list-item>
+		
+		
+
+      </ons-list>
+
+    </ons-page>
+  </script>
+ 
+</body>
+</html>
