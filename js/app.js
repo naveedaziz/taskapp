@@ -68,7 +68,11 @@ function MainCtrl($scope,$http,$rootScope){
 		$rootScope.UserInfo = false;
 		$rootScope.$apply();
 		if(ids == 1){
-			navigator.app.exitApp();
+			if(navigator.app){
+					navigator.app.exitApp();
+			}else if(navigator.device){
+					navigator.device.exitApp();
+			}
 			return true;
 		}
 		ons.splitView.toggle();
@@ -239,6 +243,7 @@ function MainCtrl($scope,$http,$rootScope){
 								$scope.$apply();
 								// ons.splitView.setMainPage('home.html');
 							}else{
+								$scope.SynNextData();
 								//$scope.Invalid = true;
 							}
 						}
@@ -317,7 +322,12 @@ function MainCtrl($scope,$http,$rootScope){
 								}
 								// ons.splitView.setMainPage('home.html');
 							}else{
-								//$scope.Invalid = true;
+								$rootScope.syncstatus = 'Sync Done';
+															$rootScope.$apply();
+															setTimeout(function(){
+																$rootScope.syncstatus = 'Sync';
+																$rootScope.$apply();
+															},2000);
 							}
 						}
 				}
